@@ -1,0 +1,36 @@
+site_name: WOCS
+
+
+nav:
+    - Home: 'index.md'
+    - 'Allgemein':
+        - 'Vorraussetzungen': 'requirements.md'
+        - 'Installation': 'installation.md'
+        - 'Accounts': 'accounts.md'
+        - 'Admin-Panel': 'admin_panel.md'
+        - 'App-Interface': 'app_interface.md'
+    - 'Module':
+        - 'Account': 'module_session.md'
+        - 'Boote': 'module_boats.md'
+        - 'Kontakte': 'module_contact.md'
+        - 'Trainingszeiten': 'module_training.md'
+        - 'Dokumente': 'module_document.md'
+        - 'Veranstaltungen': 'module_event.md'
+        - 'Slots': 'module_slots.md'
+        - 'Strecken': 'module_tracks.md'
+        - 'Nachrichten': 'module_messages.md'
+
+    - 'Info':
+        - 'Changelog' : 'changelog.md'
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - admonition
+  
+theme:
+  name: material
+  features:
+    - navigation.tabs

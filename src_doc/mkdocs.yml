@@ -1,0 +1,22 @@
+site_name: RoApp Server
+
+
+nav:
+    - Home: 'index.md'
+    - 'Module':
+
+        - 'Accounts': 'module_account.md'
+        - 'Berechtigungsgruppen': 'module_permission.md'
+        - 'Boote': 'module_boats.md'
+        - 'Kontakte': 'module_contact.md'
+        - 'Trainingszeiten': 'module_training.md'
+        - 'Orte': 'module_location.md'
+        - 'Dokumente': 'module_document.md'
+        - 'Veranstaltungen': 'module_event.md'
+    - 'Info':
+        - 'Changelog' : 'changelog.md'
+
+markdown_extensions:
+   - admonition
+   - pymdownx.details
+   - pymdownx.superfences
