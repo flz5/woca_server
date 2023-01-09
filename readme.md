@@ -1,9 +1,5 @@
 # WOCA-Server
-
-Content Server
-
-PHP
-
+An app content server written in PHP for rowing and canoe clubs.
 
 The project is under work and at the moment not finished:
 
