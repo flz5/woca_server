@@ -75,7 +75,6 @@ function db_boat_getTypeAll() : ?array{
     return $tt ?? null;
 
 }
-}
 
 function db_boat_editType($id,$data) : void{
     //Eintrag 0 darf nicht bearbeitet werden

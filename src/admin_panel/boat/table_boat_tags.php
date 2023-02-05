@@ -41,22 +41,20 @@ if (!ss_account_requestPermission("boat", 2)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Boot-Tag | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser
+    <div style="font-size: x-large">Boot-Tag hinzufügen/bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Tags
 
 </div>
 
 <br>
 <div class="container_default">
 
-
-<a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser<br><br>
 <a href="form_tag_edit.php">Neu ...</a> <br>
 
 

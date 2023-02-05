@@ -47,7 +47,7 @@ if (!ss_account_requestPermission("boat", 1)) {
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
+    <div style="font-size: x-large">Boote Übersicht</div>
     <a href="..\index.php">Start</a> > Boote
 
 </div>
@@ -118,16 +118,11 @@ if (!ss_account_requestPermission("boat", 1)) {
 
             $json = json_encode($bb);
 
-            echo "<td> <a href='form_boat_edit.php?data=".$json."'>Bearbeiten</a><a href='formDeleteBoat.php?data=".$json."'>Löschen</a></td>";
+            echo "<td> <a href='form_boat_edit.php?data=".$json."'>Bearbeiten</a><br><a href='form_boat_delete.php?data=".$json."'>Löschen</a></td>";
 
             echo "<tr>";
         }
-
     }
-
-
-
-
     ?>
 
 </table>

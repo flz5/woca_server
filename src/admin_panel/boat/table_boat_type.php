@@ -41,14 +41,14 @@ if (!ss_account_requestPermission("boat", 2)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Boot-Typ | WOCS</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser
+    <div style="font-size: x-large">Boot-Typ Übersicht</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Typen
 
 </div>
 
@@ -56,7 +56,6 @@ if (!ss_account_requestPermission("boat", 2)) {
 <div class="container_default">
 
 
-<a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser<br><br>
 <a href="form_type_edit.php">Neu ...</a> <br>
 
 

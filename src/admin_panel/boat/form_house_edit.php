@@ -69,21 +69,21 @@ if(isset($_GET['data'])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Bootshaus bearbeiten | WOCS</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser
+    <div style="font-size: x-large">Bootshaus hinzufügen/bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Bote</a> > <a href="table_boat_house.php">Bootshäuser</a> > Bearbeiten
 
 </div>
 
 <br>
 <div class="container_default">
 
-<a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > <a href="table_boat_house.php">Bootshäuser</a> Bootshaus hinzufügen<br><br>
+
 
 <form action="action_house_save.php">
 

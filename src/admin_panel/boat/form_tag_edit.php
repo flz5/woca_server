@@ -75,24 +75,19 @@ if(!isset($st)){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Boot-Tag bearbeiten | WOCS</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser
+    <div style="font-size: x-large">Boot-Tag hinzufügen/bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > <a href="table_boat_tags.php">Tags</a> > Bearbeiten
 
 </div>
 
 <br>
 <div class="container_default">
-
-
-<a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > <a href="table_boat_tags.php">Tags</a> Tag hinzufügen<br><br>
-
-
 
 <form action="action_tag_save.php">
 

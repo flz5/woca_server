@@ -41,13 +41,13 @@ if (!ss_account_requestPermission("boat", 2)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Bootshäuser | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
+    <div style="font-size: x-large">Bootshäuser</div>
     <a href="..\index.php">Start</a> > <a href="index.php">Boote</a> > Bootshäuser
 
 </div>
@@ -55,7 +55,7 @@ if (!ss_account_requestPermission("boat", 2)) {
 <br>
 <div class="container_default">
 
-<br><br>
+<br>
 <a href="form_house_edit.php">Neu ...</a> <br>
 
 
