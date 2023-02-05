@@ -10,6 +10,4 @@ create table document
         primary key (id)
 );
 
-create unique index document_id_uindex
-    on document (id);
 

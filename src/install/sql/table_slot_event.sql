@@ -8,6 +8,4 @@ create table slot_event
         primary key (id)
 );
 
-create unique index slot_event_id_uindex
-    on slot_event (id);
 

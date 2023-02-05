@@ -21,15 +21,10 @@
  * Aufgaben:
  * Entfernen der Installationsdateien so dass über diese keine weitere Installation im Betrieb mehr ausgeführt werden kann
  *
- *
- */
-
-/*
  * Entfernen aller Dateien aus dem Install Ordner (außer index)
  * Umleiten auf Index
  *
  */
-
 
 function rrmdir($dir) {
     if (is_dir($dir)) {
@@ -44,14 +39,22 @@ function rrmdir($dir) {
     }
 }
 
+//Index des Installers durch Platzhalterseite ersetzen
 copy("data_internal/install/index.php","index.php");
-unlink("action_install_content.php");
-unlink("action_install_database.php");
-unlink("action_install_files");
-unlink("form_install_content.php");
-unlink("form_install_database.php");
 
+//Skripte löschen
+unlink("action_install_config.php");
+unlink("action_install_database.php");
+unlink("action_install_database_user.php");
+unlink("action_install_drop_tables.php");
+unlink("action_install_files.php");
+unlink("form_install_config.php");
+unlink("sql_exec.php");
+
+//Ordner löschen
 rrmdir("sql");
 rrmdir("data_internal");
 
+//Umleiten zur neuen Startseite des Installers
 header('Location: index.php', true, 301);
+exit;

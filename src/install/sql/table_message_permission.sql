@@ -9,6 +9,4 @@ create table message_permission
         primary key (id)
 );
 
-create unique index message_permission_id_uindex
-    on message_permission (id);
 

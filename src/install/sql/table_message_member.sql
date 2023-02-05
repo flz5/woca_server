@@ -10,6 +10,4 @@ create table message_member
         primary key (id)
 );
 
-create unique index message_member_id_uindex
-    on message_member (id);
 

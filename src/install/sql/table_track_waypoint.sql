@@ -8,6 +8,4 @@ create table track_waypoint
         primary key (id)
 );
 
-create unique index track_waypoint_id_uindex
-    on track_waypoint (id);
 

@@ -17,10 +17,10 @@
  */
 
 //MySQL database server
-$mysql_server = "MYSQL_SERVER";
-$mysql_user = "MYSQL_USER";
-$mysql_password = "MYSQL_PASSWORD";
-$mysql_database = "MYSQL_DATABASE";
+$mysql_server = "%MYSQL_SERVER%";
+$mysql_user = "%MYSQL_USER%";
+$mysql_password = "%MYSQL_PASSWORD%";
+$mysql_database = "%MYSQL_DATABASE%";
 
 //login / security
 $security_ip_enabled = true;

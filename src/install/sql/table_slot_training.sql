@@ -8,6 +8,4 @@ create table slot_training
         primary key (id)
 );
 
-create unique index slot_training_id_uindex
-    on slot_training (id);
 

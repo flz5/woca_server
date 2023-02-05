@@ -31,13 +31,10 @@ if (!ss_account_isLoggedIn()) {
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
-
 
 include_once '../../lib/training/db_training_group.php';
 include_once '../../lib/training/struct_training_group.php';
-
 
 $st = new struct_training_group();
 $st->id = $_GET['id'];
@@ -45,11 +42,15 @@ $st->name = $_GET['name'];
 $st->description = $_GET['description'];
 $st->color = $_GET['color'];
 
-
 //Wenn ID=0 neuen Eintrag anlegen
 
 if(!db_training_checkGroupStruct($st)){
     die("Daten unvollständig!");
+}
+
+//Prüfen ob die Farbe einen gültigen RGB Wert darstellt
+if (!preg_match("#^[a-fA-F0-9]+$#", $st->color)) {
+    die("Farbwert ist ungültig (ungültiges Zeichen vorhanden A-F*0-9 erlaubt)");
 }
 
 if($st->id != 0){

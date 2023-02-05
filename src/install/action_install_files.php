@@ -19,7 +19,7 @@
 /**
  * recursively create a long directory path
  */
-function createPath($path) {
+function createPath($path) : bool{
     if (is_dir($path))
         return true;
     $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
@@ -27,9 +27,10 @@ function createPath($path) {
     return ($return && is_writable($prev_path)) ? mkdir($path) : false;
 }
 
-createPath("../data_internal/permissions/admin.ini");
+createPath("../data_internal/permissions/");
 copy("data_internal/permission/admin.ini","../data_internal/permissions/admin.ini");
 
-echo "Dateien kopiert";
+header('Location: index.php?rval=5', true, 301);
+exit;
 
 ?>

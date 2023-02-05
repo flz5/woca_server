@@ -7,6 +7,4 @@ create table track_startpoint
         primary key (id)
 );
 
-create unique index track_startpoint_id_uindex
-    on track_startpoint (id);
 

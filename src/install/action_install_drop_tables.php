@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the WOCA (server) project.
  * Copyright (c) 2020-2022 Frank Zimdars.
@@ -16,7 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * Benuzterkonto (Admin) anlegen
- *
- */
+include_once "sql_exec.php";
+
+exeSQL("sql/drop_tables.sql");
+header('Location: index.php?rval=4', true, 301);
+exit;

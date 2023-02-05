@@ -9,6 +9,4 @@ create table message_channel
         primary key (id)
 );
 
-create unique index message_channel_id_uindex
-    on message_channel (id);
 

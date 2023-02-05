@@ -19,13 +19,50 @@
 ?>
 
 <html>
-
 <body>
 
-<a href="form_install_database.php">Konfiguration einrichten</a><br>
-<a href="form_install_content.php">Datensatz erstellen</a><br>
-<a href="action_install_destroy.php">Installer entfernen</a>
+<h2>Woca-Server</h2>
+<h3>Installer</h3>
+
+<?php
+
+if(isset($_GET['rval'])){
+    echo "<p>";
+
+    switch ($_GET['rval']) {
+        case 1:
+            echo "Tabellen hinzugefügt.";
+            break;
+        case 2:
+            echo "Benutzer hinzugefügt.";
+            break;
+        case 3:
+            echo "Konfiguration gespeichert.";
+            break;
+        case 4:
+            echo "Tabellen gelöscht.";
+            break;
+        case 5:
+            echo "Dateien kopiert.";
+            break;
+    }
+
+    echo "</p><br>";
+}
+?>
+
+Installation: <br>
+<a href="form_install_config.php">Konfiguration einrichten</a><br>
+<a href="action_install_database.php">Datenbank Tabellen erstellen</a><br>
+<a href="action_install_database_user.php">Benutzer(Admin) erstellen</a><br>
+<a href="action_install_files.php">Gruppen einrichten</a><br>
+<a href="action_install_destroy.php">Installer entfernen</a><br><br>
+
+Wartungsoptionen: <br>
+<a href="action_install_drop_tables.php">Tabellen löschen</a><br><br>
+
+Hinweis: <br>
+Der Installer muss, nach dem alle Vorgänge abgeschlossen wurden, gelöscht werden. <br>
 
 </body>
-
 </html>
