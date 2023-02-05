@@ -81,7 +81,7 @@ class slot_event{
      */
     function getListEvent($event) : ?array{
 
-        $hh = db_slots_training_getAllWhereTraining($event);
+        $hh = db_slots_event_getAllWhereEvent($event);
         return $hh;
 
     }

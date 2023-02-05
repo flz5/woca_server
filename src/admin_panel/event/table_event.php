@@ -21,17 +21,13 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 1)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
@@ -65,15 +61,14 @@ if (!ss_account_requestPermission("event", 1)) {
         <td>ID</td>
         <td>Name</td>
         <td>Beschreibung</td>
-        <td>Tag</td>
         <td>Start (u)</td>
         <td>Ende (u)</td>
+        <td>Plätze</td>
         <td>Farbe</td>
         <td>Ort</td>
         <td>Gruppe</td>
         <td>Aktion</td>
     </tr>
-
 
     <?php
     include_once "../../lib/events/db_event.php";
@@ -87,9 +82,9 @@ if (!ss_account_requestPermission("event", 1)) {
             echo"<td>".$bb->id . "</td>";
             echo"<td>".$bb->name . "</td>";
             echo"<td>".$bb->description . "</td>";
-            echo"<td>".$bb->day . "</td>";
             echo"<td>".$bb->time_start . "</td>";
             echo"<td>".$bb->time_end . "</td>";
+            echo"<td>".$bb->slots . "</td>";
             echo"<td>".$bb->color . "</td>";
             echo"<td>".$bb->location . "</td>";
             echo"<td>".$bb->group . "</td>";
@@ -104,10 +99,6 @@ if (!ss_account_requestPermission("event", 1)) {
             echo "<tr>";
         }
     }
-
-
-
-
     ?>
 
 </table>

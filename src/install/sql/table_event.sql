@@ -9,7 +9,7 @@ create table event
     time_end       int           null,
     color          varchar(20)   null,
     location       int default 0 null,
-    training_group varchar(50)   null,
+    event_group    varchar(50)   null,
     slots          int           null
 );
 

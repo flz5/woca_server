@@ -37,13 +37,14 @@ function db_event_getAll()
 
     foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
 
-        $bs = new  struct_training();
+        $bs = new  struct_event();
         $bs->id = $dsatz['id'];
         $bs->name = $dsatz['name'];
         $bs->description = $dsatz['description'];
         $bs->day = $dsatz['day'];
         $bs->time_start = $dsatz['time_start'];
         $bs->time_end = $dsatz['time_end'];
+        $bs->slots = $dsatz['slots'];
         $bs->color = $dsatz['color'];
         $bs->location = $dsatz['location'];
         $bs->group = $dsatz['event_group'];
@@ -98,7 +99,7 @@ function db_event_getWhereID($id)
 
 }
 
-function db_event_edit(struct_training $data)
+function db_event_edit(struct_event $data)
 {
 
     global $mysql_server;
@@ -109,11 +110,11 @@ function db_event_edit(struct_training $data)
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
-    $stmt = $mysqli->prepare("UPDATE event SET name=?, description=?, day=?, time_start=?, time_end=?,
+    $stmt = $mysqli->prepare("UPDATE event SET name=?, description=?, slots=?, time_start=?, time_end=?,
                     color=?, location=?, event_group=? WHERE id=?");
     $stmt->bind_param('ssiiisiii',$data->name,
         $data->description,
-        $data->day,
+        $data->slots,
         $data->time_start,
         $data->time_end,
         $data->color,
@@ -139,28 +140,24 @@ function db_event_new($data)
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
-    $stmt = $mysqli->prepare("INSERT INTO training (name, description, day, time_start, time_end, color, location, event_group) 
-                VALUES(?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('ssiiiiisii',$data->name,
+    $stmt = $mysqli->prepare("INSERT INTO event (name, description, time_start, time_end, slots, color, location, event_group) 
+                VALUES(?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('ssiiisii',$data->name,
         $data->description,
-        $data->day,
         $data->time_start,
         $data->time_end,
+        $data->slots,
         $data->color,
         $data->location,
         $data->group);
 
     $stmt->execute();
 
-
     /* Verbindung schließen */
     $mysqli->close();
-
 }
 
-
 function db_event_delete($data){
-
 
     global $mysql_server;
     global $mysql_user;
@@ -170,14 +167,12 @@ function db_event_delete($data){
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
-    $stmt = $mysqli->prepare("DELETE FROM event_group WHERE id=?");
+    $stmt = $mysqli->prepare("DELETE FROM event WHERE id=?");
     $stmt->bind_param('i',$data->id);
 
     $stmt->execute();
     $stmt->close();
-
 }
-
 
 //Gibt die Anzahl der Datensätze zurück die die Location nutzen
 function db_event_isUsingLocation($location) : int{
@@ -215,7 +210,6 @@ function db_event_isUsingLocation($location) : int{
 //Gibt die Anzahl der Datensätze zurück die die Location nutzen
 function db_event_isUsingGroup($group) : int{
 
-
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -224,7 +218,7 @@ function db_event_isUsingGroup($group) : int{
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
-    $stmt = $mysqli->prepare("select * from event WHERE training_group=?");
+    $stmt = $mysqli->prepare("select * from event WHERE event_group=?");
     $stmt->bind_param('i',$group);
 
     $stmt->execute();
@@ -233,36 +227,28 @@ function db_event_isUsingGroup($group) : int{
     $count = 0;
 
     foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
-
         $count++;
-
     }
 
     /* Verbindung schließen */
     $mysqli->close();
-
     return $count;
-
 }
 
-function db_event_checkStruct($data){
+function db_event_checkStruct($data) : bool{
 
     if(!isset($data->id)){
         return false;
     }
-
     if(!isset($data->name)){
         return false;
     }
-
     if(!isset($data->description)){
         return false;
     }
-
     if(!isset($data->group)){
         return false;
     }
-
     if(!isset($data->color)){
         return false;
     }
@@ -275,7 +261,7 @@ function db_event_checkStruct($data){
         return false;
     }
 
-    if(!isset($data->day)){
+    if(!isset($data->slots)){
         return false;
     }
 

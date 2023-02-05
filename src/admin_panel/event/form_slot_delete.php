@@ -21,19 +21,14 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 include_once '../../lib/boat/db_boat.php';
-//include_once '../../lib/location/struct_location.php';
-//include_once '../../lib/location/db_location.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
@@ -49,15 +44,7 @@ if (!ss_account_requestPermission("training", 2)) {
 
 <?php
 
-//Parameter:
-//Anzeigeparameter
-//Form abgesendet
-
-
 if(isset($_GET['id'])){
-
-
-
     if(!isset($id)){
         echo "<div class='d4'>";
         echo "<p class='p4'>";
@@ -66,9 +53,7 @@ if(isset($_GET['id'])){
         echo "Fehlerhafter Datensatz<br><br>";
         echo "<a href='index.php'>Zurück</a><br><br>";
         echo "</div>";
-
     }else{
-
         echo "<div class='d4'>";
         echo "<p class='p4'>";
         echo "Löschen bestätigen";
@@ -77,12 +62,8 @@ if(isset($_GET['id'])){
         echo "<a href='action_slot_delete.php?id=".$_GET['id']."'>Löschen</a><br><br>";
         echo "<a href='index.php'>Abbrechen</a><br><br>";
         echo "</div>";
-
     }
-
 }else{
-
-
     echo "<div class='d4'>";
     echo "<p class='p4'>";
     echo "Fehler";

@@ -20,24 +20,17 @@ session_start();
 
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
-include_once '../../lib/boat/db_boat.php';
-//include_once '../../lib/location/struct_location.php';
-//include_once '../../lib/location/db_location.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,18 +41,7 @@ if (!ss_account_requestPermission("event", 2)) {
 </head>
 <body>
 
-
-
-
-
 <?php
-
-//Parameter:
-//Anzeigeparameter
-//Form abgesendet
-
-
-
 
 if(isset($_GET['data'])){
 
@@ -73,9 +55,7 @@ if(isset($_GET['data'])){
         echo "Fehlerhafter Datensatz<br><br>";
         echo "<a href='index.php'>Zurück</a><br><br>";
         echo "</div>";
-
     }else{
-
         if($st->id == 0){
             echo "<div class='d4'>";
             echo "<p class='p4'>";
@@ -86,38 +66,17 @@ if(isset($_GET['data'])){
             echo "</div>";
 
         }else{
-
-            if(db_boat_isUsedHouse($st->id)){
-                echo "<div class='d4'>";
-                echo "<p class='p4'>";
-                echo "Eintrag wird noch verwendet";
-                echo "<p/>";
-                echo "Der Eintrag ist noch in Verwendung und kann nicht gelöscht werden!<br><br>";
-                echo "<a href='index.php'>Zurück</a><br><br>";
-                echo "</div>";
-
-            }else{
                 echo "<div class='d4'>";
                 echo "<p class='p4'>";
                 echo "Löschen bestätigen";
                 echo "<p/>";
                 echo "Soll der Eintrag wirklich gelöscht werden?<br><br>";
-                echo "<a href='delete_training.php?data=".$_GET['data']."'>Löschen</a><br><br>";
+                echo "<a href='action_event_delete.php?data=".$_GET['data']."'>Löschen</a><br><br>";
                 echo "<a href='index.php'>Abbrechen</a><br><br>";
                 echo "</div>";
-
-            }
-
         }
-
     }
-
-
-
-
 }else{
-
-
     echo "<div class='d4'>";
     echo "<p class='p4'>";
     echo "Fehler";
@@ -127,9 +86,7 @@ if(isset($_GET['data'])){
     echo "</div>";
 }
 
-
 ?>
-
 
 </body>
 </html>

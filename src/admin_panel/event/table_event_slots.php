@@ -21,17 +21,13 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 1)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
@@ -58,7 +54,6 @@ if (!ss_account_requestPermission("event", 1)) {
 
     </tr>
 
-
     <?php
     include_once "../../lib/slots/slot_event.php";
     include_once '../../lib/training/db_training_group.php';
@@ -66,7 +61,6 @@ if (!ss_account_requestPermission("event", 1)) {
     $tt = new slot_event();
     $tt->setUserID(ss_account_getID());
     $list = $tt->getListEvent($_GET['id'],0);
-
 
     if(isset($list)){
         foreach ($list as $bb){
@@ -77,20 +71,12 @@ if (!ss_account_requestPermission("event", 1)) {
 
             $json = json_encode($bb);
             echo "<a href='action_slot_delete.php?id=".$bb->id."'>Löschen</a></td>";
-
             echo "<tr>";
         }
     }
-
-
-
-
     ?>
 
-
-
 </table>
-
 
 </body>
 </html>

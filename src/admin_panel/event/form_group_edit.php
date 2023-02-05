@@ -24,33 +24,24 @@ include_once '../../lib/account/session_login.php';
 include_once '../../lib/location/db_location.php';
 include_once '../../lib/location/struct_location.php';
 
-include_once '../../lib/training/db_training.php';
-include_once '../../lib/training/struct_training.php';
-
 include_once "../../lib/events/db_event.php";
 include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
-
 if(isset($_GET['data'])){
-
     $st = json_decode($_GET['data']);
-
     if(!db_event_checkGroupStruct($st)){
         echo "Daten unvollständig!";
     }
-
 }else{
     $st = new struct_event_group();
     $st->id = 0;
@@ -82,7 +73,6 @@ if(isset($_GET['data'])){
 
 <br><br>
 
-
 <form action="action_group_save.php">
 
     <table>
@@ -90,25 +80,19 @@ if(isset($_GET['data'])){
         <tr>
             <td>Name:</td>
             <td><input type="name" name="name" value="<?php echo $st->name; ?>"></td>
-
         </tr>
         <tr>
             <td>Beschreibung:</td>
             <td><input type="name" name="description" value="<?php echo $st->description; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Farbe:</td>
             <td><input type="name" name="color" value="<?php echo $st->color; ?>"></td>
 
         </tr>
-
     </table>
 
-
     <input type="hidden" name="id" value="<?php echo $st->id; ?>">
-
     <input type="submit" value="Speichern">
 
 </form>

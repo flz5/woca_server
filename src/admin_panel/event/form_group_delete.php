@@ -25,22 +25,16 @@ include_once "../../lib/events/db_event.php";
 include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
-
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,18 +45,7 @@ if (!ss_account_requestPermission("event", 2)) {
 </head>
 <body>
 
-
-
-
-
 <?php
-
-//Parameter:
-//Anzeigeparameter
-//Form abgesendet
-
-
-
 
 if(isset($_GET['data'])){
 
@@ -76,9 +59,7 @@ if(isset($_GET['data'])){
         echo "Fehlerhafter Datensatz<br><br>";
         echo "<a href='table_group.php'>Zurück</a><br><br>";
         echo "</div>";
-
     }else{
-
         if($st->id == 0){
             echo "<div class='d4'>";
             echo "<p class='p4'>";
@@ -87,10 +68,8 @@ if(isset($_GET['data'])){
             echo "Der Eintrag kann nicht gelöscht werden<br>Eintrag 0<br><br>";
             echo "<a href='table_group.php'>Abbrechen</a><br><br>";
             echo "</div>";
-
         }else{
-
-            if(db_training_isUsingGroup($st->id)){
+            if(db_event_isUsingGroup($st->id)){
                 echo "<div class='d4'>";
                 echo "<p class='p4'>";
                 echo "Eintrag wird noch verwendet";
@@ -98,7 +77,6 @@ if(isset($_GET['data'])){
                 echo "Der Eintrag ist noch in Verwendung und kann nicht gelöscht werden!<br><br>";
                 echo "<a href='table_group.php'>Zurück</a><br><br>";
                 echo "</div>";
-
             }else{
                 echo "<div class='d4'>";
                 echo "<p class='p4'>";
@@ -108,19 +86,10 @@ if(isset($_GET['data'])){
                 echo "<a href='action_group_delete.php?data=".$_GET['data']."'>Löschen</a><br><br>";
                 echo "<a href='table_group.php'>Abbrechen</a><br><br>";
                 echo "</div>";
-
             }
-
         }
-
     }
-
-
-
-
 }else{
-
-
     echo "<div class='d4'>";
     echo "<p class='p4'>";
     echo "Fehler";
@@ -129,7 +98,6 @@ if(isset($_GET['data'])){
     echo "<a href='table_group.php'>Zurück</a><br><br>";
     echo "</div>";
 }
-
 
 ?>
 

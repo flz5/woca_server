@@ -24,6 +24,7 @@ class struct_event{
 
     public $time_start;
     public $time_end;
+    public $slots;
 
     public $color;
     public $location;

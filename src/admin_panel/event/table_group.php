@@ -21,21 +21,16 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 1)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +65,6 @@ if (!ss_account_requestPermission("event", 1)) {
         <td>Aktion</td>
     </tr>
 
-
     <?php
     include_once "../../lib/events/db_event.php";
     include_once '../../lib/events/appstruct_event.php';
@@ -93,12 +87,7 @@ if (!ss_account_requestPermission("event", 1)) {
         }
     }
 
-
-
-
     ?>
-
-
 
 </table>
 </div>

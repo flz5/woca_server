@@ -20,55 +20,25 @@ session_start();
 
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
-include_once '../../lib/training/db_training.php';
-
+include_once '../../lib/events/db_event.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
-
-//Parameter:
-//Anzeigeparameter
-//Form abgesendet
-
-include_once '../../lib/boat/struct_boat.php';
-include_once '../../lib/boat/struct_boat_house.php';
-include_once '../../lib/boat/struct_boat_type.php';
-include_once '../../lib/boat/struct_boat_tags.php';
-
-include_once '../../lib/boat/db_boat.php';
-include_once '../../lib/boat/db_boat_house.php';
-include_once '../../lib/boat/db_boat_tags.php';
-include_once '../../lib/boat/db_boat_type.php';
-
-
 if(isset($_GET['data'])){
-
     $st = json_decode($_GET['data']);
-
-
-    db_training_delete($st);
+    db_event_delete($st);
     header('Location: index.php', true, 301);
     exit();
-
-
-
-
-
-
 }else{
     echo "Ungültig!";
 }
-
 
 ?>
 

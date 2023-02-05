@@ -28,37 +28,29 @@ include_once "../../lib/events/db_event.php";
 include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
-
 if(isset($_GET['data'])){
-
     $st = json_decode($_GET['data']);
-
     if(!db_event_checkStruct($st)){
         echo "Daten unvollständig!";
     }
-
 }else{
     $st = new struct_event();
     $st->name = 0;
     $st->description = 0;
     $st->day = "0";
-    $st->start_hour = "0";
-    $st->start_minute = "0";
-    $st->end_hour = "0";
-    $st->end_minute = "0";
-    $st->color = "*";
+    $st->time_start = "0";
+    $st->time_end = "0";
+    $st->slots = "0";
+    $st->color = "FFFFFF";
     $st->location = 0;
     $st->group = 0;
     $st->id = 0;
@@ -66,118 +58,94 @@ if(isset($_GET['data'])){
 
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orte | WOCS</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+<div class="container_header">
+    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Events hinzufügen/bearbeiten
+
+</div>
+
+<br>
+
+<div class="container_default">
 
 <h2>Übersicht</h2>
 
 <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Event hinzufügen/bearbeiten<br><br>
 
-
 <form action="action_event_save.php">
 
     <table>
-
         <tr>
             <td>Name:</td>
             <td><input type="name" name="name" value="<?php echo $st->name; ?>"></td>
-
         </tr>
         <tr>
             <td>Beschreibung:</td>
             <td><input type="name" name="description" value="<?php echo $st->description; ?>"></td>
-
-        </tr>
-
-        <tr>
-            <td>Tag:</td>
-            <td><input type="name" name="day" value="<?php echo $st->day; ?>"></td>
-
-        </tr>
-
-        <tr>
-            <td>Start-Minute:</td>
-            <td><input type="name" name="start_hour" value="<?php echo $st->start_hour; ?>"></td>
-
         </tr>
         <tr>
-            <td>Start-Stude:</td>
-            <td><input type="name" name="start_minute" value="<?php echo $st->start_minute; ?>"></td>
-
+            <td>Startzeit (Posix):</td>
+            <td><input type="name" name="time_start" value="<?php echo $st->time_start; ?>"></td>
         </tr>
         <tr>
-            <td>Ende-Stunde:</td>
-            <td><input type="name" name="end_hour" value="<?php echo $st->end_hour; ?>"></td>
-
+            <td>Endzeit (Posix):</td>
+            <td><input type="name" name="time_end" value="<?php echo $st->time_end; ?>"></td>
         </tr>
         <tr>
-            <td>Ende-Minute:</td>
-            <td><input type="name" name="end_minute" value="<?php echo $st->end_minute; ?>"></td>
-
+            <td>Plätze:</td>
+            <td><input type="name" name="slots" value="<?php echo $st->slots; ?>"></td>
         </tr>
         <tr>
             <td>Farbe:</td>
             <td><input type="name" name="color" value="<?php echo $st->color; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Ort:</td>
             <td>
-
                 <select name="location" id="house-select">
                     <?php
                     $list = db_location_getAll();
 
                     foreach($list as $k){
-
                         if($k->id == $st->location){
                             echo "<option value='".$k->id."' selected>".$k->name."</option>";
                         }else{
                             echo "<option value='".$k->id."'>".$k->name."</option>";
                         }
-
-
                     }
                     ?>
                 </select>
-
-
             </td>
-
         </tr>
-
         <tr>
             <td>Gruppe:</td>
             <td>
-
-
-
                 <select name="group" id="house-select7">
                     <?php
-                    $list = db_training_group_getAll();
+                    $list = db_event_group_getAll();
                     foreach($list as $k){
-
                         if($k->id == $st->group){
                             echo "<option value='".$k->id."' selected>".$k->name."</option>";
                         }else{
                             echo "<option value='".$k->id."'>".$k->name."</option>";
                         }
-
-
                     }
                     ?>
                 </select>
-
-
             </td>
-
         </tr>
-
     </table>
 
-
     <input type="hidden" name="id" value="<?php echo $st->id; ?>">
-
     <input type="submit" value="Speichern">
 
 </form>

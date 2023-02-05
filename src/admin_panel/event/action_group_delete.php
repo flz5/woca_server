@@ -20,28 +20,21 @@ session_start();
 
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
-
 include_once "../../lib/events/db_event.php";
 include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 if(isset($_GET['data'])){
-
     $st = json_decode($_GET['data']);
-
     if(db_event_isUsingGroup($st->id)){
         echo "Der Datensatz wird noch verwendet und kann nicht gelöscht werden!";
     }else{
@@ -49,11 +42,9 @@ if(isset($_GET['data'])){
         header('Location: table_group.php', true, 301);
         exit();
     }
-
 }else{
     echo "Ungültig!";
 }
-
 
 ?>
 

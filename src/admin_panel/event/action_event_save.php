@@ -20,44 +20,35 @@ session_start();
 
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
-
+include_once "../../lib/events/db_event.php";
+include_once '../../lib/events/appstruct_event.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
-
-
-include_once "../../lib/events/db_event.php";
-include_once '../../lib/events/appstruct_event.php';
-
 
 $st = new struct_event();
 $st->name = $_GET['name'];
 $st->description = $_GET['description'];
-$st->day = $_GET['day'];
-$st->start_hour = $_GET['start_hour'];
-$st->start_minute = $_GET['start_minute'];
-$st->end_hour = $_GET['end_hour'];
-$st->end_minute = $_GET['end_minute'];
+$st->time_start = $_GET['time_start'];
+$st->time_end = $_GET['time_end'];
+$st->slots = $_GET['slots'];
 $st->color = $_GET['color'];
 $st->location = $_GET['location'];
 $st->group = $_GET['group'];
 $st->id = $_GET['id'];
 
-//Wenn ID=0 neuen Eintrag anlegen
-
+//Prüfen ob die Daten vollständig sind
 if(!db_event_checkStruct($st)){
     die("Daten unvollständig!");
 }
 
+//Wenn ID=0 neuen Eintrag anlegen
 if($st->id != 0){
     db_event_edit($st);
 

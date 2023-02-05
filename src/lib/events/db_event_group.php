@@ -118,7 +118,7 @@ function db_event_editGroup($data) : bool
     return true;
 }
 
-function db_event_newGroup(struct_training_group $data) : bool
+function db_event_newGroup(struct_event_group $data) : bool
 {
 
 
