@@ -65,21 +65,26 @@ if(isset($_GET['data'])){
 ?>
 
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Eintrag Dokument bearbeiten | WOCS</title>
-
+    <meta charset="UTF-8">
+    <title>Dokumente bearbeiten | WOCS</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<h2>Übersicht</h2>
+<body>
+<div class="container_header">
+    <div style="font-size: x-large">Dokumente bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="table_documents.php">Dokumente</a> > Bearbeiten
 
-<a href="..\index.html">Start</a>
-<a href="formEditDocument.php">Neu ...</a> <br>
+</div>
 
+<br>
 
 <?php echo $name; ?>
 
-<form action="edit.php">
+<form action="action_document_save.php">
 
 
     <table>
@@ -123,6 +128,6 @@ if(isset($_GET['data'])){
     <input type="submit" value="Speichern">
 
 </form>
-
+</body>
 
 </html>

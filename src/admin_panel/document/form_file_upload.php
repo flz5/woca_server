@@ -22,14 +22,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dokument hochladen | WOCS</title>
+    <title>Datei hochladen | WOCS</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
+<div class="container_header">
+    <div style="font-size: x-large">Datei hochladen</div>
+    <a href="..\index.php">Start</a> > <a href="table_documents.php">Dokumente</a> > <a href="table_files.php">Dateien</a> > Hochladen
 
-<h2>Bild hochladen</h2>
-
-<a href="..\index.php"> Start </a> > <a href="index.php">Dokumente</a> > <a href="table_files.php">Dateiübersicht</a> > Neu <br><br>
-
+</div>
 
 <form action="action_file_upload.php" method="post" enctype="multipart/form-data">
     Datei: <input type="file" name="datei"><br><br>

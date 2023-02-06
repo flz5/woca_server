@@ -34,8 +34,8 @@ if (!ss_account_requestPermission("documents", 2)) {
 }
 
 
-include_once '../../lib/documents/db_document.php.php';
-include_once '../../lib/documents/appstruct_document.php.php';
+include_once '../../lib/documents/db_document.php';
+include_once '../../lib/documents/appstruct_document.php';
 
 $obj = new appstruct_document();
 $obj->title = $_GET['title'];

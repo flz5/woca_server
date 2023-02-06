@@ -43,13 +43,18 @@ if (!ss_account_requestPermission("contact", 2)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dokumente Dateien | WOCA</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
+<div class="container_header">
+    <div style="font-size: x-large">Dokumente Dateien</div>
+    <a href="..\index.php">Start</a> > <a href="table_documents.php">Dokumente</a> > Dateien
 
-<h2>Dateiübersicht Dokumente</h2>
+</div>
 
-<a href="..\index.php"> Start </a> > <a href="index.php">Dokumente</a> > Dateiübersicht <br><br>
+<br>
 
 <a href="form_file_upload.php">Neu ...</a> <br><br>
 

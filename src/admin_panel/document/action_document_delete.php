@@ -20,7 +20,7 @@ session_start();
 
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
-include_once '../../lib/contact/contact_db.php';
+include_once '../../lib/documents/db_document.php';
 
 if (!ss_account_isLoggedIn()) {
 
@@ -29,7 +29,7 @@ if (!ss_account_isLoggedIn()) {
     //die("Nicht angemeldet");
 }
 
-if (!ss_account_requestPermission("document", 2)) {
+if (!ss_account_requestPermission("documents", 2)) {
     die("Keine Berechtigung!");
 
 }
@@ -44,7 +44,7 @@ if(isset($_GET['data'])){
         echo "<a href='index.php'>Zurück</a>";
     }
 
-    db_contact_delete($st);
+    db_document_delete($st);
     header('Location: index.php', true, 301);
 
 

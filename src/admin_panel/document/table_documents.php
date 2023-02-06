@@ -42,15 +42,20 @@ if (!ss_account_requestPermission("documents", 2)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dokumente Übersicht | WOCS</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
+<div class="container_header">
+    <div style="font-size: x-large">Übersicht Dokumente</div>
+    <a href="..\index.php">Start</a> > Dokumente
 
-<h2>Übersicht Kontakte</h2>
+</div>
 
-<a href="..\index.php">Start</a> > Dokumente <br>
+<br>
 
-<a href="formEditDocument.php">Neuer Eintrag</a>
+<a href="form_document_edit.php">Neuer Eintrag</a>
 <a href="table_files.php">Dateien verwalten</a> <br>
 
 <br>
@@ -84,7 +89,7 @@ if (!ss_account_requestPermission("documents", 2)) {
 
             $json = json_encode($bb);
 
-            echo "<td> <a href='formEditDocument.php?data=".$json."'>Bearbeiten</a> <a href='formDeleteDocument.php?data=".$json."'>Löschen</a></td>";
+            echo "<td> <a href='form_document_edit.php?data=".$json."'>Bearbeiten</a> <a href='form_document_delete.php?data=".$json."'>Löschen</a></td>";
             echo "<tr>";
         }
     }

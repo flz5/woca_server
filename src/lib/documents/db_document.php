@@ -50,11 +50,11 @@ function db_document_getAll() : ?array{
     /* Verbindung schließen */
     $mysqli->close();
 
-    return $boats;
+    return $boats ?? null;
 }
 
 
-function db_document_edit(appstruct_document $data){
+function db_document_edit(appstruct_document $data) : void{
 
     global $mysql_server;
     global $mysql_user;
@@ -78,7 +78,7 @@ function db_document_edit(appstruct_document $data){
 
 }
 
-function db_document_new(appstruct_document $data){
+function db_document_new(appstruct_document $data) : void{
 
     global $mysql_server;
     global $mysql_user;
