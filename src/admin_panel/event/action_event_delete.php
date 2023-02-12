@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,9 +31,8 @@ if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
 }
 
-if(isset($_GET['data'])){
-    $st = json_decode($_GET['data']);
-    db_event_delete($st);
+if(isset($_GET['id'])){
+    db_event_delete($_GET['id']);
     header('Location: index.php', true, 301);
     exit();
 }else{

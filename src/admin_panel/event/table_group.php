@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,13 +36,13 @@ if (!ss_account_requestPermission("event", 1)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Event Gruppen | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Event</div>
+    <div style="font-size: x-large">Event Gruppen</div>
     <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Gruppen
 
 </div>
@@ -67,7 +67,6 @@ if (!ss_account_requestPermission("event", 1)) {
 
     <?php
     include_once "../../lib/events/db_event.php";
-    include_once '../../lib/events/appstruct_event.php';
     include_once "../../lib/events/db_event_group.php";
 
     $boats = db_event_group_getAll();
@@ -80,8 +79,7 @@ if (!ss_account_requestPermission("event", 1)) {
             echo"<td>".$bb->description . "</td>";
             echo"<td>".$bb->color . "</td>";
 
-            $json = json_encode($bb);
-            echo "<td> <a href='form_group_edit.php?data=".$json."'>Bearbeiten</a><a href='form_group_delete.php?data=".$json."'>Löschen</a></td>";
+            echo "<td> <a href='form_group_edit.php?id=".$bb->id."'>Bearbeiten</a> <a href='form_group_delete.php?id=".$bb->id."'>Löschen</a></td>";
 
             echo "<tr>";
         }

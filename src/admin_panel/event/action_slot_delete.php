@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,9 +16,27 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-include_once "../../lib/slots/slot_event.php";
-include_once '../../lib/training/db_training_group.php';
 
-$tt = new slot_event();
-$tt->delete($_GET['id']);
-echo "OK";
+session_start();
+
+include_once '../../lib/account/db_account.php';
+include_once '../../lib/account/session_login.php';
+include_once '../../lib/events/db_event_slots.php';
+
+if (!ss_account_isLoggedIn()) {
+    header('Location: ../login/form_login.php?option=p', true, 301);
+    exit();
+}
+
+if (!ss_account_requestPermission("event", 2)) {
+    die("Keine Berechtigung!");
+}
+
+if(isset($_GET['id'])){
+    ddb_event_slot_delete($_GET['id'],0);
+    header('Location: index.php', true, 301);
+    exit();
+}else{
+    echo "Ungültig!";
+}
+

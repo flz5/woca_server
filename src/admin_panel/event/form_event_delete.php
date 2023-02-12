@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ if (!ss_account_requestPermission("event", 2)) {
 
 <?php
 
-if(isset($_GET['data'])){
+if(isset($_GET['id'])){
 
-    $st = json_decode($_GET['data']);
+    $id = $_GET['id'];
 
-    if(!isset($st->id)){
+    if(!isset($id)){
         echo "<div class='d4'>";
         echo "<p class='p4'>";
         echo "Fehler";
@@ -56,7 +56,7 @@ if(isset($_GET['data'])){
         echo "<a href='index.php'>Zurück</a><br><br>";
         echo "</div>";
     }else{
-        if($st->id == 0){
+        if($id == 0){
             echo "<div class='d4'>";
             echo "<p class='p4'>";
             echo "Löschen bestätigen";
@@ -71,7 +71,7 @@ if(isset($_GET['data'])){
                 echo "Löschen bestätigen";
                 echo "<p/>";
                 echo "Soll der Eintrag wirklich gelöscht werden?<br><br>";
-                echo "<a href='action_event_delete.php?data=".$_GET['data']."'>Löschen</a><br><br>";
+                echo "<a href='action_event_delete.php?id=".$id."'>Löschen</a><br><br>";
                 echo "<a href='index.php'>Abbrechen</a><br><br>";
                 echo "</div>";
         }

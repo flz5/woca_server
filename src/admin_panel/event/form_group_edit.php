@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ include_once '../../lib/location/db_location.php';
 include_once '../../lib/location/struct_location.php';
 
 include_once "../../lib/events/db_event.php";
-include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
 if (!ss_account_isLoggedIn()) {
@@ -37,17 +36,15 @@ if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
 }
 
-if(isset($_GET['data'])){
-    $st = json_decode($_GET['data']);
-    if(!db_event_checkGroupStruct($st)){
-        echo "Daten unvollständig!";
-    }
+if(isset($_GET['id'])){
+    $st = db_event_getGroupWhereID($_GET['id']);
+
 }else{
-    $st = new struct_event_group();
+    $st = new struct_event_group_raw();
     $st->id = 0;
     $st->color = 'CCFFCC';
-    $st->name ='*';
-    $st->description = '*';
+    $st->name ='Name';
+    $st->description = 'Beschreibung';
 }
 
 ?>
@@ -56,14 +53,14 @@ if(isset($_GET['data'])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Event Gruppe bearbeiten | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Events hinzufügen/bearbeiten
+    <div style="font-size: x-large">Event Gruppe bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Events bearbeiten
 
 </div>
 
@@ -73,7 +70,7 @@ if(isset($_GET['data'])){
 
 <br><br>
 
-<form action="action_group_save.php">
+<form action="action_group_save.php" method="post">
 
     <table>
 

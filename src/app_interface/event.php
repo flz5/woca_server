@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,10 @@
  */
 
 include_once "../lib/events/db_event.php";
-include_once "../lib/events/appstruct_event.php";
+require_once "../lib/events/db_event.php";
+require_once "../lib/events/struct_event_joined.php";
 
-$event_list = db_event_getAppStructAll();
+$event_list = db_event_get_list_joined();
 
 echo json_encode($event_list);
 

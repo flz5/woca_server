@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,19 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-class appstruct_event
-{
-    public $title;
-    public $description;
-    public $time_start;
-    public $time_end;
-    public $place;
-    public $geo_lat;
-    public $geo_long;
-    public $address;
-    public $color;
-    public $group;
-    public $hasDate;
-    public $hasLocation;
+class struct_event_raw{
+    public int $id;
+    public string $name;
+    public string $description;
+
+    public int $time_start;
+    public int $time_end;
+    public int $slots;
+
+    public string $color;
+    public int $location;
+    public int $group;
 
 }
 
-
+?>

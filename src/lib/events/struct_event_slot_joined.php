@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,9 +16,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-include_once "../../lib/slots/slot_training.php";
-include_once '../../lib/training/db_training_group.php';
+class struct_event_slot_joined{
 
-$tt = new slot_training();
-$tt->delete($_GET['id']);
-echo "OK";
+    public int $id;         //Database ID
+    public int $user_id;     //User ID
+    public string $user_name;     //User ID
+    public int $event_id;    //event ID
+    public int $time;       //Timestamp, when the entry was created
+
+
+}

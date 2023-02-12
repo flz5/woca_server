@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,12 +17,10 @@
  */
 
 include_once dirname(__FILE__) . "/../config.php";
-include_once "struct_event_group.php";
+include_once dirname(__FILE__) . "/struct_event_group_raw.php";
 
 function db_event_group_getAll() : ?array
 {
-
-
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -32,32 +30,26 @@ function db_event_group_getAll() : ?array
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
     $stmt = $mysqli->prepare("select * from event_group");
-
     $stmt->execute();
     $result = $stmt->get_result();
 
-    foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
-
-        $bs = new struct_event_group();
-        $bs->id = $dsatz['id'];
-        $bs->name = $dsatz['name'];
-        $bs->description = $dsatz['description'];
-        $bs->color = $dsatz['color'];
-
-        $boats[] = $bs;
-
+    foreach($result->fetch_all(MYSQLI_ASSOC) as $col){
+        $st = new struct_event_group_raw();
+        $st->id = $col['id'];
+        $st->name = $col['name'];
+        $st->description = $col['description'];
+        $st->color = $col['color'];
+        $list[] = $st;
     }
 
     /* Verbindung schließen */
     $mysqli->close();
 
-    return $boats ?? null;
-
+    return $list ?? null;
 }
 
-function db_event_getGroupWhereID($id) : ?struct_training_group
+function db_event_getGroupWhereID($id) : ?struct_event_group_raw
 {
-
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -72,28 +64,22 @@ function db_event_getGroupWhereID($id) : ?struct_training_group
     $stmt->execute();
     $result = $stmt->get_result();
 
-    foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
-
-        $bs = new  struct_event_group();
-        $bs->id = $dsatz['id'];
-        $bs->name = $dsatz['name'];
-        $bs->description = $dsatz['description'];
-        $bs->day = $dsatz['color'];
-
-        $boats[] = $bs;
-
+    foreach($result->fetch_all(MYSQLI_ASSOC) as $col){
+        $st = new  struct_event_group_raw();
+        $st->id = $col['id'];
+        $st->name = $col['name'];
+        $st->description = $col['description'];
+        $st->color = $col['color'];
+        $list[] = $st;
     }
 
     /* Verbindung schließen */
     $mysqli->close();
-
-    return $boats[0];
-
+    return $list[0] ?? null;
 }
 
-function db_event_editGroup($data) : bool
+function db_event_group_edit($data) : bool
 {
-
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -104,7 +90,6 @@ function db_event_editGroup($data) : bool
 
     $stmt = $mysqli->prepare("UPDATE event_group SET name=?,description=?,color=? WHERE id=?");
     $stmt->bind_param('sssi',
-
         $data->name,
         $data->description,
         $data->color,
@@ -114,14 +99,11 @@ function db_event_editGroup($data) : bool
 
     /* Verbindung schließen */
     $mysqli->close();
-
     return true;
 }
 
-function db_event_newGroup(struct_event_group $data) : bool
+function db_event_group_new(struct_event_group_raw $data) : bool
 {
-
-
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -137,17 +119,12 @@ function db_event_newGroup(struct_event_group $data) : bool
         $data->color);
 
     $stmt->execute();
-
     /* Verbindung schließen */
     $mysqli->close();
-
     return true;
-
 }
 
-function db_event_deleteGroup($data){
-
-
+function db_event_group_delete($id) : void{
     global $mysql_server;
     global $mysql_user;
     global $mysql_password;
@@ -157,15 +134,13 @@ function db_event_deleteGroup($data){
     $mysqli = new mysqli($mysql_server, $mysql_user, $mysql_password, $mysql_database);
 
     $stmt = $mysqli->prepare("DELETE FROM event_group WHERE id=?");
-    $stmt->bind_param('i',$data->id);
+    $stmt->bind_param('i',$id);
 
     $stmt->execute();
     $stmt->close();
-
 }
 
-function db_event_checkGroupStruct($data){
-
+function db_event_checkGroupStruct($data) : bool{
     if(!isset($data->id)){
         return false;
     }
@@ -179,6 +154,6 @@ function db_event_checkGroupStruct($data){
         return false;
     }
     return true;
-
 }
 
+?>

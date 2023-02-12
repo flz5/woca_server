@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,28 +71,29 @@ if (!ss_account_requestPermission("event", 1)) {
     </tr>
 
     <?php
+
     include_once "../../lib/events/db_event.php";
     include_once '../../lib/events/appstruct_event.php';
 
-    $boats = db_event_getAll();
+    $boats = db_event_get_list_joined(0,0);
 
     if(isset($boats)){
         foreach ($boats as $bb){
             echo "<tr>";
             echo"<td>".$bb->id . "</td>";
-            echo"<td>".$bb->name . "</td>";
+            echo"<td>".$bb->title . "</td>";
             echo"<td>".$bb->description . "</td>";
             echo"<td>".$bb->time_start . "</td>";
             echo"<td>".$bb->time_end . "</td>";
-            echo"<td>".$bb->slots . "</td>";
+            echo"<td>".$bb->slots_total . "</td>";
             echo"<td>".$bb->color . "</td>";
-            echo"<td>".$bb->location . "</td>";
-            echo"<td>".$bb->group . "</td>";
+            echo"<td>".$bb->location_id ."(". $bb->location_name. ")</td>";
+            echo"<td>".$bb->group_id ."(". $bb->group_name. ")</td>";
 
             $json = json_encode($bb);
             echo "<td>";
-            echo " <a href='form_event_edit.php?data=".$json."'>Bearbeiten</a>";
-            echo"<a href='form_event_delete.php?data=".$json."'>Löschen</a>";
+            echo " <a href='form_event_edit.php?id=".$bb->id."'>Bearbeiten</a> ";
+            echo"<a href='form_event_delete.php?id=".$bb->id."'>Löschen</a> ";
             echo"<a href='table_event_slots.php?id=".$bb->id."'>Teilnehmer</a>";
             echo"</td>";
 

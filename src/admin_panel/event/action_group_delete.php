@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 include_once "../../lib/events/db_event.php";
-include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
 if (!ss_account_isLoggedIn()) {
@@ -33,12 +32,12 @@ if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
 }
 
-if(isset($_GET['data'])){
-    $st = json_decode($_GET['data']);
-    if(db_event_isUsingGroup($st->id)){
+if(isset($_GET['id'])){
+    //$st = json_decode($_GET['data']);
+    if(db_event_is_using_group($_GET['id'])){
         echo "Der Datensatz wird noch verwendet und kann nicht gelöscht werden!";
     }else{
-        db_event_deleteGroup($st);
+        db_event_group_delete($_GET['id']);
         header('Location: table_group.php', true, 301);
         exit();
     }

@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
 include_once "../../lib/events/db_event.php";
-include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
 if (!ss_account_isLoggedIn()) {
@@ -47,11 +46,9 @@ if (!ss_account_requestPermission("event", 2)) {
 
 <?php
 
-if(isset($_GET['data'])){
-
-    $st = json_decode($_GET['data']);
-
-    if(!isset($st->id)){
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    if(!isset($id)){
         echo "<div class='d4'>";
         echo "<p class='p4'>";
         echo "Fehler";
@@ -60,7 +57,7 @@ if(isset($_GET['data'])){
         echo "<a href='table_group.php'>Zurück</a><br><br>";
         echo "</div>";
     }else{
-        if($st->id == 0){
+        if($id == 0){
             echo "<div class='d4'>";
             echo "<p class='p4'>";
             echo "Löschen bestätigen";
@@ -69,7 +66,7 @@ if(isset($_GET['data'])){
             echo "<a href='table_group.php'>Abbrechen</a><br><br>";
             echo "</div>";
         }else{
-            if(db_event_isUsingGroup($st->id)){
+            if(db_event_is_using_group($id)){
                 echo "<div class='d4'>";
                 echo "<p class='p4'>";
                 echo "Eintrag wird noch verwendet";
@@ -83,7 +80,7 @@ if(isset($_GET['data'])){
                 echo "Löschen bestätigen";
                 echo "<p/>";
                 echo "Soll der Eintrag wirklich gelöscht werden?<br><br>";
-                echo "<a href='action_group_delete.php?data=".$_GET['data']."'>Löschen</a><br><br>";
+                echo "<a href='action_group_delete.php?id=".$id."'>Löschen</a><br><br>";
                 echo "<a href='table_group.php'>Abbrechen</a><br><br>";
                 echo "</div>";
             }
@@ -100,7 +97,6 @@ if(isset($_GET['data'])){
 }
 
 ?>
-
 
 </body>
 </html>

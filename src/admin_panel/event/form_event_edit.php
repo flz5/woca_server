@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,7 @@ include_once '../../lib/account/session_login.php';
 
 include_once '../../lib/location/db_location.php';
 include_once '../../lib/location/struct_location.php';
-
 include_once "../../lib/events/db_event.php";
-include_once '../../lib/events/appstruct_event.php';
 include_once "../../lib/events/db_event_group.php";
 
 if (!ss_account_isLoggedIn()) {
@@ -37,22 +35,20 @@ if (!ss_account_requestPermission("event", 2)) {
     die("Keine Berechtigung!");
 }
 
-if(isset($_GET['data'])){
-    $st = json_decode($_GET['data']);
-    if(!db_event_checkStruct($st)){
-        echo "Daten unvollständig!";
-    }
+
+
+if(isset($_GET['id'])){
+    $st = db_event_get_item_joined($_GET['id']);
 }else{
-    $st = new struct_event();
-    $st->name = 0;
-    $st->description = 0;
-    $st->day = "0";
+    $st = new struct_event_joined();
+    $st->title = 'Name';
+    $st->description = 'Beschreibung';
     $st->time_start = "0";
     $st->time_end = "0";
-    $st->slots = "0";
     $st->color = "FFFFFF";
-    $st->location = 0;
-    $st->group = 0;
+    $st->location_id = 0;
+    $st->group_id = 0;
+    $st->slots_total = 100;
     $st->id = 0;
 }
 
@@ -62,14 +58,14 @@ if(isset($_GET['data'])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orte | WOCS</title>
+    <title>Event bearbeiten | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Events hinzufügen/bearbeiten</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Events hinzufügen/bearbeiten
+    <div style="font-size: x-large">Events bearbeiten</div>
+    <a href="..\index.php">Start</a> > <a href="table_event.php">Events</a> > Events hinzufügen/bearbeiten
 
 </div>
 
@@ -77,16 +73,12 @@ if(isset($_GET['data'])){
 
 <div class="container_default">
 
-<h2>Übersicht</h2>
-
-<a href="..\index.php">Start</a> > <a href="index.php">Events</a> > Event hinzufügen/bearbeiten<br><br>
-
-<form action="action_event_save.php">
+<form action="action_event_save.php" method="post">
 
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="name" name="name" value="<?php echo $st->name; ?>"></td>
+            <td><input type="name" name="name" value="<?php echo $st->title; ?>"></td>
         </tr>
         <tr>
             <td>Beschreibung:</td>
@@ -102,7 +94,7 @@ if(isset($_GET['data'])){
         </tr>
         <tr>
             <td>Plätze:</td>
-            <td><input type="name" name="slots" value="<?php echo $st->slots; ?>"></td>
+            <td><input type="name" name="slots" value="<?php echo $st->slots_total; ?>"></td>
         </tr>
         <tr>
             <td>Farbe:</td>
@@ -133,7 +125,7 @@ if(isset($_GET['data'])){
                     <?php
                     $list = db_event_group_getAll();
                     foreach($list as $k){
-                        if($k->id == $st->group){
+                        if($k->id == $st->group_id){
                             echo "<option value='".$k->id."' selected>".$k->name."</option>";
                         }else{
                             echo "<option value='".$k->id."'>".$k->name."</option>";
@@ -149,6 +141,5 @@ if(isset($_GET['data'])){
     <input type="submit" value="Speichern">
 
 </form>
-
 
 </html>
