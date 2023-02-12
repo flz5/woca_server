@@ -21,12 +21,9 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 2)) {
@@ -43,7 +40,6 @@ $st->description = $_GET['description'];
 $st->color = $_GET['color'];
 
 //Wenn ID=0 neuen Eintrag anlegen
-
 if(!db_training_checkGroupStruct($st)){
     die("Daten unvollständig!");
 }

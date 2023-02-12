@@ -21,23 +21,17 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
-
 
 include_once '../../lib/training/db_training.php';
 include_once '../../lib/training/struct_training.php';
-
 
 $st = new struct_training();
 $st->name = $_GET['name'];

@@ -40,14 +40,14 @@ if (!ss_account_requestPermission("training", 1)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account erstellt | WOCS</title>
+    <title>Trainingszeiten Gruppen | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 <div class="container_header">
-    <div style="font-size: x-large">Übersicht</div>
-    <a href="..\index.php">Start</a> > <a href="index.php">Trainingszeiten</a> > Gruppen
+    <div style="font-size: x-large">Trainingszeiten Gruppen</div>
+    <a href="..\index.php">Start</a> > <a href="table_training.php">Trainingszeiten</a> > Gruppen
 
 </div>
 
@@ -71,10 +71,10 @@ if (!ss_account_requestPermission("training", 1)) {
     include_once "../../lib/training/struct_training_group.php";
     include_once '../../lib/training/db_training_group.php';
 
-    $boats = db_training_group_getAll();
+    $list = db_training_group_getAll();
 
-    if(isset($boats)){
-        foreach ($boats as $bb){
+    if(isset($list)){
+        foreach ($list as $bb){
             echo "<tr>";
             echo"<td>".$bb->id . "</td>";
             echo"<td>".$bb->name . "</td>";
@@ -82,18 +82,13 @@ if (!ss_account_requestPermission("training", 1)) {
             echo"<td>".$bb->color . "</td>";
 
             $json = json_encode($bb);
-            echo "<td> <a href='form_training_group_edit.php?data=".$json."'>Bearbeiten</a><a href='form_training_group_delete.php?data=".$json."'>Löschen</a></td>";
+            echo "<td> <a href='form_training_group_edit.php?data=".$json."'>Bearbeiten</a> ";
+            echo "<a href='form_training_group_delete.php?data=".$json."'>Löschen</a></td>";
 
             echo "<tr>";
         }
     }
-
-
-
-
     ?>
-
-
 
 </table>
 

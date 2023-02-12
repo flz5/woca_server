@@ -57,11 +57,7 @@ function db_training_getAll() :?array
     /* Verbindung schließen */
     $mysqli->close();
 
-    if(isset($boats)){
-        return $boats;
-    }else{
-        return null;
-    }
+    return $boats ?? null;
 
 
 }
@@ -89,26 +85,26 @@ function db_training_getWhereID($id)
 
     foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
 
-        $bs = new struct_training();
-        $bs->id = $dsatz['id'];
-        $bs->name = $dsatz['name'];
-        $bs->day = $dsatz['day'];
-        $bs->start_hour = $dsatz['start_hour'];
-        $bs->start_minute = $dsatz['start_minute'];
-        $bs->end_hour = $dsatz['end_hour'];
-        $bs->end_minute = $dsatz['end_minute'];
-        $bs->color = $dsatz['color'];
-        $bs->location = $dsatz['location'];
-        $bs->group = $dsatz['group'];
+        $training = new struct_training();
+        $training->id = $dsatz['id'];
+        $training->name = $dsatz['name'];
+        $training->day = $dsatz['day'];
+        $training->start_hour = $dsatz['start_hour'];
+        $training->start_minute = $dsatz['start_minute'];
+        $training->end_hour = $dsatz['end_hour'];
+        $training->end_minute = $dsatz['end_minute'];
+        $training->color = $dsatz['color'];
+        $training->location = $dsatz['location'];
+        $training->group = $dsatz['group'];
 
-        $boats[] = $bs;
+        $list_training[] = $training;
 
     }
 
     /* Verbindung schließen */
     $mysqli->close();
 
-    return $boats[0];
+    return $list_training[0];
 
 }
 
@@ -217,7 +213,7 @@ function db_training_isUsingLocation($location) : int{
 
     $count = 0;
 
-    foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
+    foreach($result->fetch_all(MYSQLI_ASSOC) as $ignored){
 
         $count++;
 
@@ -250,7 +246,7 @@ function db_training_isUsingGroup($group) : int{
 
     $count = 0;
 
-    foreach($result->fetch_all(MYSQLI_ASSOC) as $dsatz){
+    foreach($result->fetch_all(MYSQLI_ASSOC) as $ignored){
 
         $count++;
 

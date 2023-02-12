@@ -21,17 +21,13 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 1)) {
     die("Keine Berechtigung!");
-
 }
 
 ?>
@@ -73,15 +69,14 @@ if (!ss_account_requestPermission("training", 1)) {
         <td>Aktion</td>
     </tr>
 
-
     <?php
     include_once "../../lib/training/db_training.php";
     include_once '../../lib/training/struct_training.php';
 
-    $boats = db_training_getAll();
+    $list = db_training_getAll();
 
-    if($boats != null){
-        foreach ($boats as $bb){
+    if($list != null){
+        foreach ($list as $bb){
             echo "<tr>";
             echo"<td>".$bb->id . "</td>";
             echo"<td>".$bb->name . "</td>";
@@ -97,18 +92,12 @@ if (!ss_account_requestPermission("training", 1)) {
 
             $json = json_encode($bb);
             echo "<td>";
-            echo "<a href='form_training_edit.php?data=".$json."'>Bearbeiten</a>";
+            echo "<a href='form_training_edit.php?data=".$json."'>Bearbeiten</a> ";
             echo "<a href='form_training_delete.php?data=".$json."'>Löschen</a>";
-            echo "<a href='table_training_slots.php?data=".$json."'>Teilnehmer</a>";
             echo "</td>";
             echo "<tr>";
         }
-
     }
-
-
-
-
     ?>
 
 </table>

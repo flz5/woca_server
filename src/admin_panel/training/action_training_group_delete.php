@@ -25,19 +25,15 @@ include_once '../../lib/training/db_training.php';
 include_once '../../lib/training/struct_training_group.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
-    //die("Nicht angemeldet");
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 if(isset($_GET['data'])){
-
     $st = json_decode($_GET['data']);
 
     if(db_training_isUsingGroup($st->id)){
@@ -51,7 +47,6 @@ if(isset($_GET['data'])){
 }else{
     echo "Ungültig!";
 }
-
 
 ?>
 

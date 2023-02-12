@@ -31,14 +31,12 @@ include_once "../../lib/training/struct_training_group.php";
 include_once '../../lib/training/db_training_group.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
 
 
@@ -52,14 +50,14 @@ if(isset($_GET['data'])){
 
 }else{
     $st = new struct_training();
-    $st->name = 0;
-    $st->description = 0;
+    $st->name = "Name";
+    $st->description = "Beschreibung";
     $st->day = "0";
     $st->start_hour = "0";
     $st->start_minute = "0";
     $st->end_hour = "0";
     $st->end_minute = "0";
-    $st->color = "*";
+    $st->color = "CCCCCC";
     $st->location = 0;
     $st->group = 0;
     $st->id = 0;
@@ -84,14 +82,12 @@ if(isset($_GET['data'])){
 
 <div class="container_default">
 
-
 <br><br>
 
 
 <form action="action_training_edit.php">
 
     <table>
-
         <tr>
             <td>Name:</td>
             <td><input type="name" name="name" value="<?php echo $st->name; ?>"></td>
@@ -100,45 +96,34 @@ if(isset($_GET['data'])){
         <tr>
             <td>Beschreibung:</td>
             <td><input type="name" name="description" value="<?php echo $st->description; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Tag:</td>
             <td><input type="name" name="day" value="<?php echo $st->day; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Start-Minute:</td>
             <td><input type="name" name="start_hour" value="<?php echo $st->start_hour; ?>"></td>
-
         </tr>
         <tr>
             <td>Start-Stude:</td>
             <td><input type="name" name="start_minute" value="<?php echo $st->start_minute; ?>"></td>
-
         </tr>
         <tr>
             <td>Ende-Stunde:</td>
             <td><input type="name" name="end_hour" value="<?php echo $st->end_hour; ?>"></td>
-
         </tr>
         <tr>
             <td>Ende-Minute:</td>
             <td><input type="name" name="end_minute" value="<?php echo $st->end_minute; ?>"></td>
-
         </tr>
         <tr>
             <td>Farbe:</td>
             <td><input type="name" name="color" value="<?php echo $st->color; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Ort:</td>
             <td>
-
                 <select name="location" id="house-select">
                     <?php
                     $list = db_location_getAll();
@@ -150,23 +135,14 @@ if(isset($_GET['data'])){
                         }else{
                             echo "<option value='".$k->id."'>".$k->name."</option>";
                         }
-
-
                     }
                     ?>
                 </select>
-
-
             </td>
-
         </tr>
-
         <tr>
             <td>Gruppe:</td>
             <td>
-
-
-
                 <select name="group" id="house-select7">
                     <?php
                     $list = db_training_group_getAll();
@@ -177,22 +153,14 @@ if(isset($_GET['data'])){
                         }else{
                             echo "<option value='".$k->id."'>".$k->name."</option>";
                         }
-
-
                     }
                     ?>
                 </select>
-
-
             </td>
-
         </tr>
-
     </table>
 
-
     <input type="hidden" name="id" value="<?php echo $st->id; ?>">
-
     <input type="submit" value="Speichern">
 
 </form>

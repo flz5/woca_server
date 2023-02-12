@@ -31,16 +31,13 @@ include_once "../../lib/training/struct_training_group.php";
 include_once '../../lib/training/db_training_group.php';
 
 if (!ss_account_isLoggedIn()) {
-
     header('Location: ../login/form_login.php?option=p', true, 301);
     exit();
 }
 
 if (!ss_account_requestPermission("training", 2)) {
     die("Keine Berechtigung!");
-
 }
-
 
 if(isset($_GET['data'])){
 
@@ -54,8 +51,8 @@ if(isset($_GET['data'])){
     $st = new struct_training_group();
     $st->id = 0;
     $st->color = 'CCFFCC';
-    $st->name ='*';
-    $st->description = '*';
+    $st->name ='Gruppenname';
+    $st->description = 'Beschreibung';
 }
 
 ?>
@@ -64,38 +61,27 @@ if(isset($_GET['data'])){
 
 <h2>Übersicht</h2>
 
-<a href="..\index.php">Start</a> > <a href="index.php">Trainingszeiten</a> > Trainingszeiten hinzufügen/bearbeiten<br><br>
+<a href="..\index.php">Start</a> > <a href="table_training.php">Trainingszeiten</a> > Trainingszeiten hinzufügen/bearbeiten<br><br>
 
-
-<form action="action_training_edit.php">
+<form action="action_training_group_edit.php">
 
     <table>
-
         <tr>
             <td>Name:</td>
             <td><input type="name" name="name" value="<?php echo $st->name; ?>"></td>
-
         </tr>
         <tr>
             <td>Beschreibung:</td>
             <td><input type="name" name="description" value="<?php echo $st->description; ?>"></td>
-
         </tr>
-
         <tr>
             <td>Farbe:</td>
             <td><input type="name" name="color" value="<?php echo $st->color; ?>"></td>
-
         </tr>
-
     </table>
 
-
     <input type="hidden" name="id" value="<?php echo $st->id; ?>">
-
     <input type="submit" value="Speichern">
 
 </form>
-
-
 </html>
