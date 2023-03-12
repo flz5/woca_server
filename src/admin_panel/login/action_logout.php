@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,24 +29,18 @@ ss_account_logout();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account erstellt | WOCS</title>
+    <title>Account erstellt | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
-
 <div class="container_default">
-
     <div class="d4">
-
         <p class="p4">
-
             Abmeldung erfolgreich
         </p>
         Die Benutzersitzung wurde erfolgreich geschlossen.<br><br>
         <a href="../index.php">Start</a>
     </div>
-
-
 </div>

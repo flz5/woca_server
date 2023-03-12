@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,6 @@ session_start();
 include_once '../../lib/account/db_account.php';
 include_once '../../lib/account/session_login.php';
 
-
-
-
 if(!ss_account_isLoggedIn()){
 
     header('Location: ../login/form_login.php?option=p', true, 301);
@@ -31,14 +28,13 @@ if(!ss_account_isLoggedIn()){
     //die("Nicht angemeldet");
 }
 
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account erstellt | WOCS</title>
+    <title>Account erstellt | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -49,79 +45,51 @@ if(!ss_account_isLoggedIn()){
 
 </div>
 
-<div class="container_default">
-
-
- <br><br>
-
-
+<div class="container_default"><br><br>
 
 <?php
 
 if(isset($_GET['option'])){
-
-
     echo "<div class='dnote'>";
 
     switch($_GET['option']){
-
         case 'c1':{
-            echo "Logindaten sind ungültig.";
+            echo "Das alte Password ist nicht korrekt!";
         }break;
         case 'c2':{
-            echo "Neues Passwort stimmt nicht mit bestätigung überein.";
+            echo "Neues Passwort stimmt nicht mit Wiederholung überein!";
         }break;
         case 'c3':{
-            echo "Ausführung fehlgeschlagen.";
+            echo "Die Ausführung ist fehlgeschlagen!";
         }break;
         case 'c4':{
-            echo "Nicht alle Fehlder ausgefüllt.";
+            echo "Es wurden nicht alle Felder ausgefüllt!";
         }break;
-
     }
-
     echo "</div>";
-
-
 }
 
 
 ?>
 
-
 <form action="action_password_change.php" method="post">
-
-
     <table>
-
         <tr>
-            <td>Altes Password:</td>
+            <td>Altes Passwort:</td>
             <td><input type="name" name="password_old" value=""></td>
-
         </tr>
-
-
         <tr>
             <td>Neues Passwort:</td>
             <td><input type="name" name="password_new1" value=""></td>
-
         </tr>
-
         <tr>
             <td>Neues Passwort:</td>
             <td><input type="name" name="password_new2" value=""></td>
-
         </tr>
-
-
         <tr>
             <td><input type="submit" value="Speichern"></td>
-
-
         </tr>
     </table>
-
-
 </form>
 
 </div>

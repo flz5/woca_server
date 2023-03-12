@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ include_once '../../lib/account/enum_login_state.php';
 
 <html>
 <head>
-    <title>Anmelden | WOCS</title>
+    <title>Anmelden | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <div class="d4">
@@ -30,27 +30,25 @@ include_once '../../lib/account/enum_login_state.php';
         Anmeldung
     </p>
 
-
     <h2 style="margin-bottom: 0px;">Willkommen</h2>
 
     Für den Zugriff auf diese Seite ist eine Anmeldung erforderlich.<br><br>
 
     <?php
-
-    if(isset($_GET['cc'])){
+    if(isset($_GET['login_state'])){
 
         echo "<p class='box_failed' style='margin-left: 15px;margin-right: 15px;'>";
 
-        switch($_GET['cc']){
+        switch($_GET['login_state']){
 
             case LoginState::WrongCredentials->value:{
-                echo "Eingegebene Daten ungültig";
+                echo "Die eingegebene Daten sind ungültig!";
             }break;
             case LoginState::TooManyAttempts->value:{
-                echo "Anmeldesperre";
+                echo "Die Anmeldung wurde zeitweise gesperrt!";
             }break;
             case LoginState::IPBlock->value:{
-                echo "IP gesperrt";
+                echo "Die Anmeldung von dieser IP wurde zeitweise gesperrt!";
             }break;
             case LoginState::Abort->value:{
                 echo "Beide Felder müssen ausgefüllt werden!";
@@ -58,65 +56,35 @@ include_once '../../lib/account/enum_login_state.php';
             case LoginState::NotActivated->value:{
                 echo "Der Account ist nicht zur Anmeldung freigegeben!";
             }break;
-
-
         }
-
         echo "</p>";
-
     }
-
 
     ?>
 
-
     <form action="action_login.php" method="post">
-
-
         <table>
-
             <tr>
                 <td>Benutzername:</td>
                 <td><input type="name" name="username" value=""></td>
-
             </tr>
-
-
             <tr>
                 <td>Passwort:</td>
                 <td><input type="password" name="password" value=""></td>
-
             </tr>
-
             <tr>
-                <td colspan="2">
-                    <a href="form_notes.php">Hinweise zum Anmelden</a>
-
+                <td>
+                    <input type="submit" value="Anmelden">
                 </td>
-
             </tr>
             <tr>
-                <td colspan="2">
-                    <a href="form_password_forgot.php">Passwort vergessen</a>
-
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="2">
+                <td>
+                    <a href="form_notes.php">Hinweise zum Anmelden</a><br>
                     <a href="../about.php">Info über...</a>
-
                 </td>
-
             </tr>
         </table>
         <br>
-
-        <input type="submit" value="Anmelden">
-
     </form>
-
 </div>
-
-
 </html>

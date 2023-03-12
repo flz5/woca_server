@@ -1,7 +1,7 @@
 <?php
 /*
  * This file is part of the WOCA (server) project.
- * Copyright (c) 2020-2022 Frank Zimdars.
+ * Copyright (c) 2020-2023 Frank Zimdars.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,33 +23,30 @@ include_once '../../lib/account/enum_login_state.php';
 <html>
 
 <head>
-    <title>Hinweise Login | WOCS</title>
+    <title>Hinweise Login | WOCA</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-
+<body>
 <div class="d4">
     <p class="p4">
         Hinweise zur Anmeldung
     </p>
 
-
-    <h2 style="margin-bottom: 0px;">Willkommen</h2>
-
-    Für den Zugriff auf diese Seite ist eine Anmeldung erforderlich.<br><br>
-
-
     <h3>Automatische Sperrung der Anmeldung</h3>
-    Zu viele falsche Passwörter, IP Addresse zu oft versucht
+    Wenn zu oft versucht wird, sich mit falschen Zugangsdaten anzumelden, <br>
+    wird die Anmeldung beim angegebenen Account für eine kurze Zeit gesperrt. <br>
+    Die Zugangsdaten werden als falsch angezeigt, auch wenn sie korrekt sind. <br>
+    Jeder Versuch setzt die Wartezeit zurück! <br>
 
-    Weitere Anmeldeversuche werden als flasch angezeitgt, auch wenn die Daten korrekt sind. Die Sperre wird
-    automatisch zurückgesetzte.
+    <h3>Speicherung der IP Addresse</h3>
+    Die IP Addresse wird beim Anmeldevorgang in einer Datenbank gespeichert.
 
-    <h3>asd</h3>
-    asd<br><br>
+    <h3>Passwort vergessen</h3>
+    Vergessene Passwörter können nicht automatisch zurückgesetzt werden!<br>
+    Die Wiederherstellung muss durch einen Benutzer mit der Berechtigung erfolgen.<br><br>
 
     <a href="form_login.php">Zurück</a><br>
 
 </div>
-
-
+</body>
 </html>
